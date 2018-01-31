@@ -13,6 +13,7 @@ const map = new mapboxgl.Map({
   style: "mapbox://styles/mapbox/streets-v10" // mapbox has lots of different map styles available.
 });
 
+// These things get info from the DB and populate our select dropdowns
 const hotelLocations = [];
 fetch('/api/hotels')
   .then(res => res.json())
@@ -53,17 +54,34 @@ fetch('/api/restaurants')
   .catch(console.error);
 
 
+  // These things add markers to a given itinerary,
+  //  and pull location coordinates from their respective arrays
+
   const addHotel = document.getElementById('hotels-add');
   addHotel.onclick = function(){
+    //getting values for current hotel
     let sel = document.getElementById('hotels-choices');
     let cur = sel.options[sel.selectedIndex]
     let list = document.getElementById('hotels-list');
     let newAct = document.createElement('li');
     newAct.innerText = cur.text;
-    list.appendChild(newAct);
-    let coords = (hotelLocations[cur.value-1]);
+
+    // adding a button to the li
+    let newButt = document.createElement('button');
+    newButt.innerText = 'x';
+    newButt.id = 'buttClick';
+
+    // appending li and and button to activities list, also adding marker
+    list.appendChild(newAct).append(newButt);
+    let coords = (hotelLocations[cur.value - 1]);
     const newMarker = buildMarker('hotels', coords);
     newMarker.addTo(map);
+
+    // creating a remove button, and removing the element associated with that button
+    const buttClicker = document.getElementById('buttClick');
+    buttClicker.onclick = function() {
+      this.closest('li').remove();
+    };
   };
 
   const addRestaurant = document.getElementById('restaurants-add');
@@ -73,10 +91,23 @@ fetch('/api/restaurants')
     let list = document.getElementById('restaurants-list');
     let newAct = document.createElement('li');
     newAct.innerText = cur.text;
-    list.appendChild(newAct);
-    let coords = (restaurantLocations[cur.value-1]);
+
+    // adding a button to the li
+    let newButt = document.createElement('button');
+    newButt.innerText = 'x';
+    newButt.id = 'buttClick';
+
+    // appending li and and button to activities list, also adding marker
+    list.appendChild(newAct).append(newButt);
+    let coords = (restaurantLocations[cur.value - 1]);
     const newMarker = buildMarker('restaurants', coords);
     newMarker.addTo(map);
+
+    // creating a remove button, and removing the element associated with that button
+    const buttClicker = document.getElementById('buttClick');
+    buttClicker.onclick = function() {
+      this.closest('li').remove();
+    };
   };
 
   const addActivity = document.getElementById('activities-add');
@@ -86,10 +117,25 @@ fetch('/api/restaurants')
     let list = document.getElementById('activities-list');
     let newAct = document.createElement('li');
     newAct.innerText = cur.text;
-    list.appendChild(newAct);
-    let coords = (activityLocations[cur.value-1]);
+
+    // adding a button to the li
+    let newButt = document.createElement('button');
+    newButt.innerText = 'x';
+    newButt.id = 'buttClick';
+
+    // appending li and and button to activities list, also adding marker
+    list.appendChild(newAct).append(newButt);
+    let coords = (activityLocations[cur.value - 1]);
     const newMarker = buildMarker('activities', coords);
     newMarker.addTo(map);
+
+    // creating a remove button, and removing the element associated with that button
+    const buttClicker = document.getElementById('buttClick');
+    buttClicker.onclick = function() {
+      // var currentMarker = this.closest('li').innerText;
+      // console.log(currentMarker);
+      this.closest('li').remove();
+    };
   };
 
 const marker = buildMarker("activities", fullstackCoords);
