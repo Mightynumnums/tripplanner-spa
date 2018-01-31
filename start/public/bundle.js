@@ -558,7 +558,6 @@ fetch('/api/hotels')
     option.innerText = hotel.name;
     option.value = hotel.id;
     hotelLocations.push(hotel.place.location);
-
     select.appendChild(option);
   }))
   .catch(console.error);
@@ -572,7 +571,6 @@ fetch('/api/restaurants')
     option.innerText = restaurants.name;
     option.value = restaurants.id;
     restaurantLocations.push(restaurants.place.location);
-    // console.log(locations);
     select.appendChild(option);
   }))
   .catch(console.error);
@@ -591,19 +589,15 @@ fetch('/api/restaurants')
   .catch(console.error);
 
 
-  // LOCATIONS ARE CURRENTLY OFF BY ONE IN ARRAY
-
   const addHotel = document.getElementById('hotels-add');
-  // console.log(addHotel);
   addHotel.onclick = function(){
     let sel = document.getElementById('hotels-choices');
     let cur = sel.options[sel.selectedIndex]
-    let curId = cur.value;
     let list = document.getElementById('hotels-list');
     let newAct = document.createElement('li');
     newAct.innerText = cur.text;
     list.appendChild(newAct);
-    let coords = (hotelLocations[curId+1]);
+    let coords = (hotelLocations[cur.value-1]);
     const newMarker = buildMarker('hotels', coords);
     newMarker.addTo(map);
   };
@@ -612,12 +606,11 @@ fetch('/api/restaurants')
   addRestaurant.onclick = function(){
     let sel = document.getElementById('restaurants-choices');
     let cur = sel.options[sel.selectedIndex]
-    let curId = cur.value;
     let list = document.getElementById('restaurants-list');
     let newAct = document.createElement('li');
     newAct.innerText = cur.text;
     list.appendChild(newAct);
-    let coords = (restaurantLocations[curId+1]);
+    let coords = (restaurantLocations[cur.value-1]);
     const newMarker = buildMarker('restaurants', coords);
     newMarker.addTo(map);
   };
@@ -626,12 +619,11 @@ fetch('/api/restaurants')
   addActivity.onclick = function(){
     let sel = document.getElementById('activities-choices');
     let cur = sel.options[sel.selectedIndex]
-    let curId = cur.value;
     let list = document.getElementById('activities-list');
     let newAct = document.createElement('li');
     newAct.innerText = cur.text;
     list.appendChild(newAct);
-    let coords = (activityLocations[curId+1]);
+    let coords = (activityLocations[cur.value-1]);
     const newMarker = buildMarker('activities', coords);
     newMarker.addTo(map);
   };
