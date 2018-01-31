@@ -612,6 +612,12 @@ fetch('/api/restaurants')
     let coords = (hotelLocations[cur.value - 1]);
     const newMarker = buildMarker('hotels', coords);
     newMarker.addTo(map);
+    map.flyTo({
+      center: coords,
+      zoom: 15,
+      speed: 0.75,
+      curve: 1
+    });
 
     // creating a remove button, and removing the element associated with that button
     const buttClicker = document.getElementById('buttClick');
@@ -638,6 +644,12 @@ fetch('/api/restaurants')
     let coords = (restaurantLocations[cur.value - 1]);
     const newMarker = buildMarker('restaurants', coords);
     newMarker.addTo(map);
+    map.flyTo({
+      center: coords,
+      zoom: 15,
+      speed: 0.75,
+      curve: 1
+    });
 
     // creating a remove button, and removing the element associated with that button
     const buttClicker = document.getElementById('buttClick');
@@ -664,6 +676,13 @@ fetch('/api/restaurants')
     let coords = (activityLocations[cur.value - 1]);
     const newMarker = buildMarker('activities', coords);
     newMarker.addTo(map);
+    map.flyTo({
+      center: coords,
+      zoom: 15,
+      speed: 0.75,
+      curve: 1
+    });
+    // map.flyTo({newMarker});
 
     // creating a remove button, and removing the element associated with that button
     const buttClicker = document.getElementById('buttClick');
