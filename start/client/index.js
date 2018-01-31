@@ -87,7 +87,6 @@ fetch('/api/restaurants')
     const buttClicker = document.getElementById('buttClick');
     buttClicker.onclick = function() {
       this.closest('li').remove();
-      this.marker.remove();
     };
   };
 
