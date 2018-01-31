@@ -10,14 +10,16 @@ body {
 
 h1 {
   margin: 0;
-  font-family: 'Lobster', cursive;  
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: 2px;
   font-weight: normal;
   font-size: 2rem;
 }
 
 h2 {
   margin: 0 0 0.5rem 0;
-  font-family: 'Lobster', cursive;
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: 2px;
   font-weight: normal;
   font-size: 1.2rem;
 }
@@ -38,7 +40,7 @@ header {
 #map {
   flex: 2;
   height: calc(100vh - 3rem);
-  overflow: hidden; 
+  overflow: hidden;
 }
 
 @media screen and (max-width: 600px) {
